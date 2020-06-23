@@ -6,7 +6,7 @@ git remote -v
 git pull
 if test $(git diff --name-status origin/"${GIT_BRANCH}" | grep -c "${CHART_NAME}/Chart.yml") = 0 ; then
     echo "Extracting label information"
-    bump=$(python .github/scripts/extract_label.py)
+	bump=$(python "scripts/extract_label.py")
     if [ ! "$bump" = "nobump" ]; then
         echo "Bumping version"
         bump2version --current-version ${bump} ./${CHART_NAME}/Chart.yaml

@@ -1,0 +1,22 @@
+name: Package and push
+description: Packages and pushes helm charts
+
+inputs:  
+  charts-repo:
+    description: Repository containing helm charts
+    required: false
+    default: cloudve/helm-charts
+  chart-name:
+    description: Chart name
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.chart-name }}
+    - ${{ inputs.charts-repo }}
+    - ${{ github.event.pull_request.base.ref }}
+    - ${{ toJson(github) }}
+    - ${{ secrets.github-token }}
+    - ${{ secrets.chart-token }}
