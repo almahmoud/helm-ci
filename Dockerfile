@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM ubuntu:latest 
 
 COPY scripts /scripts
 RUN python -m pip install --upgrade pip
