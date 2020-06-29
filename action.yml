@@ -1,7 +1,7 @@
 name: Package and push
 description: Packages and pushes helm charts
 
-inputs:  
+inputs:
   charts-repo:
     description: Repository containing helm charts
     required: false
@@ -15,6 +15,12 @@ inputs:
   chart-token:
     description: Chart token
     required: true
+  github-context:
+    description: Github context
+    required: true
+  git-branch:
+    description: Git branch
+    required: true
 
 runs:
   using: 'docker'
@@ -22,7 +28,7 @@ runs:
   args:
     - ${{ inputs.chart-name }}
     - ${{ inputs.charts-repo }}
-    - ${{ github.event.pull_request.base.ref }}
-    - ${{ toJson(github) }}
+    - ${{ inputs.git-branch }}
+    - ${{ inputs.github-context }}
     - ${{ inputs.github-token }}
     - ${{ inputs.chart-token }}
