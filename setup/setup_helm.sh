@@ -20,7 +20,8 @@ mkdir helm
 mv "$FILENAME" helm/
 cd helm
 tar xvf "$FILENAME"
-cp "linux-$ARCH/{helm,tiller}" /usr/bin/
+cp linux-$ARCH/helm /usr/bin/
+cp linux-$ARCH/tiller /usr/bin/
 cd ..
 rm -rf helm
 helm init --client-only
