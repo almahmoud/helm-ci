@@ -10,8 +10,6 @@ FILENAME=helm-v$VERSION-linux-$ARCH.tar.gz
 curl -O "https://get.helm.sh/$FILENAME"
 
 if ! (echo "$CHECKSUM  $FILENAME" | sha256sum -c); then
-	echo "$CHECKSUM  $FILENAME"
-	sha256sum $FILENAME
 	echo "Invalid checksum"
 	exit 1;
 fi
@@ -21,6 +19,5 @@ mv "$FILENAME" helm/
 cd helm
 tar xvf "$FILENAME"
 cp linux-$ARCH/helm /usr/bin/
-cp linux-$ARCH/tiller /usr/bin/
 cd ..
 rm -rf helm
