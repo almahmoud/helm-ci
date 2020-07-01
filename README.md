@@ -4,7 +4,7 @@ Automatically packages and pushes chart on pull request
 
 ## How to use
 
-Make a file at `.github/workflow/packaging.yml` with the following:
+Make a file at `.github/workflows/packaging.yml` with the following:
 
 ```
 name: Package
