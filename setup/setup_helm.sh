@@ -24,4 +24,3 @@ cp linux-$ARCH/helm /usr/bin/
 cp linux-$ARCH/tiller /usr/bin/
 cd ..
 rm -rf helm
-helm init --client-only
