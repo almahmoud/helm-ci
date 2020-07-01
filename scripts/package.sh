@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 [ -z "${GIT_TOKEN}" ] && {
     echo 'Missing input "GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}".';
