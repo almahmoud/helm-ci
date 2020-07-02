@@ -5,6 +5,5 @@ RUN setup/setup_helm.sh
 RUN setup/setup_python.sh
 
 COPY scripts scripts
-WORKDIR scripts
 
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["./scripts/run.sh"]
