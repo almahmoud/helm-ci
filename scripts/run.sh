@@ -5,7 +5,7 @@ export GIT_BRANCH="$3"
 export GITHUB_CONTEXT="$4"
 export GIT_TOKEN="$5"
 echo "Bumping version if necessary..."
-./bump.sh
+/scripts/bump.sh
 export GIT_TOKEN="$6"
 echo "Packaging and pushing..."
-./package.sh
+/scripts/package.sh
