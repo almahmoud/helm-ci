@@ -23,7 +23,7 @@ jobs:
           charts-repo: CHARTS_REPO
           github-token: ${{ secrets.GITHUB_TOKEN }}
           chart-token: ${{ secrets.CHARTS_TOKEN }}
-          github-context: ${{ toJson(github) }}
+          github-labels: ${{ join(github.event.pull_request.labels.*.name, ', ') }}
           git-branch: ${{ github.event.pull_request.base.ref }}
 ```
 

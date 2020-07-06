@@ -29,6 +29,6 @@ runs:
     - ${{ inputs.chart-name }}
     - ${{ inputs.charts-repo }}
     - ${{ inputs.git-branch }}
-    - ${{ inputs.github-context }}
+    - ${{ inputs.github-labels }}
     - ${{ inputs.github-token }}
     - ${{ inputs.chart-token }}

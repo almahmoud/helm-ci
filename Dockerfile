@@ -1,9 +1,9 @@
-FROM python:3.6-alpine3.12
+FROM alpine:3.12
 
-COPY setup setup
-RUN setup/setup_helm.sh
-RUN setup/setup_python.sh
+RUN apk add curl git
+COPY setup.sh /setup.sh
+RUN /setup.sh
 
-COPY scripts /scripts
+COPY run.sh /run.sh
 
-ENTRYPOINT ["/scripts/run.sh"]
+ENTRYPOINT ["/run.sh"]
