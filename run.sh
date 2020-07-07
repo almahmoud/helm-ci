@@ -48,8 +48,6 @@ push_version() {
 }
 
 package() {
-  helm init --client-only
-
   (cd "$CHART_NAME" || error
   rm -rf charts requirements.lock
   helm dependency update)
