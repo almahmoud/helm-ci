@@ -68,8 +68,6 @@ push_package() {
   git push "$CHARTS_REMOTE" "HEAD:$CHARTS_BRANCH")
 }
 
-check_env
-
 echo "Bumping version if necessary..."
 setup_git
 git remote -v
