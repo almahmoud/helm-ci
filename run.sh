@@ -6,6 +6,7 @@ GIT_BRANCH="$3"
 PR_LABELS="$4"
 GIT_TOKEN="$5"
 CHARTS_TOKEN="$6"
+PACKAGING_COMMAND="$7"
 
 GIT_BRANCH=${GIT_BRANCH:-master}
 CHART_FILE="$CHART_NAME/Chart.yaml"
@@ -14,7 +15,7 @@ CHART_REMOTE="https://$GITHUB_ACTOR:$GIT_TOKEN@github.com/$REPOSITORY.git"
 
 CHARTS_BRANCH=${CHARTS_BRANCH:-master}
 CHARTS_REMOTE="https://$GITHUB_ACTOR:$CHARTS_TOKEN@github.com/$CHARTS_REPO.git"
-CHARTS_DIR=$(basename "$CHARTS_REPO")
+CHARTS_DIR=$(realpath "$(basename "$CHARTS_REPO")")
 
 error() {
   exit 1
@@ -56,7 +57,7 @@ package() {
   cd "$CHARTS_DIR" || error
   git checkout "$CHARTS_BRANCH")
 
-  helm package "./$CHART_NAME/" -d "$CHARTS_DIR/charts"
+  eval "$PACKAGING_COMMAND"
 }
 
 push_package() {

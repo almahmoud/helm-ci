@@ -6,6 +6,10 @@ inputs:
     description: Repository containing helm charts
     required: false
     default: cloudve/helm-charts
+  packaging-command:
+    description: command used to package chart
+    required: false
+    default: 'helm package "./$CHART_NAME/" -d "$CHARTS_DIR/charts"'
   chart-name:
     description: Chart name
     required: true
@@ -32,3 +36,4 @@ runs:
     - ${{ inputs.github-labels }}
     - ${{ inputs.github-token }}
     - ${{ inputs.chart-token }}
+    - ${{ inputs.packaging-command }}
