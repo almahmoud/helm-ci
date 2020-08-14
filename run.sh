@@ -36,7 +36,8 @@ extract_label() {
   bump=$(echo "$PR_LABELS" | awk \
     '/version/{print "1"; exit;}
     /feature/{print "2"; exit;}
-    /patch/{print "3"; exit;}')
+    /patch/{print "3"; exit;}
+	//{print ""; exit;}')
 }
 
 bump_version() {
