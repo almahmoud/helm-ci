@@ -17,16 +17,21 @@ CHARTS_BRANCH=${CHARTS_BRANCH:-master}
 CHARTS_REMOTE="https://$GITHUB_ACTOR:$CHARTS_TOKEN@github.com/$CHARTS_REPO.git"
 CHARTS_DIR=$(realpath "$(basename "$CHARTS_REPO")")
 
+# exit on error
+set -e
+
 error() {
   exit 1
 }
 
 setup_git() {
+  # initializes git info
   git config --local user.email "action@github.com"
   git config --local user.name "GitHub Action"
 }
 
 extract_label() {
+  # decides which part of the version to increment (if any)
   echo "Extracting label information"
   bump=$(echo "$PR_LABELS" | awk \
     '/version/{print "1"; exit;}
@@ -35,6 +40,8 @@ extract_label() {
 }
 
 bump_version() {
+  # bumps the part of the version defined by $bump and updates
+  # the chart 
   echo "Bumping version"
   version=$(awk '/^version/{print $2}' "$CHART_FILE")
   new_version=$(echo "$version" | awk "BEGIN {OFS=FS=\".\"} \$$bump += 1")
@@ -42,6 +49,7 @@ bump_version() {
 }
 
 push_version() {
+  # pushes the updated version to the charts repo
   echo "Pushing to branch $GIT_BRANCH"
   git add .
   git commit -m "Automatic Version Bumping"
@@ -49,6 +57,7 @@ push_version() {
 }
 
 package() {
+  # packages helm chart
   (cd "$CHART_NAME" || error
   rm -rf charts requirements.lock
   helm dependency update)
@@ -57,10 +66,12 @@ package() {
   cd "$CHARTS_DIR" || error
   git checkout "$CHARTS_BRANCH")
 
+  # custom packaging command
   eval "$PACKAGING_COMMAND"
 }
 
 push_package() {
+  # push updated chart
   echo "Pushing to branch $CHARTS_BRANCH of repo $CHARTS_REPO"
   (cd "$CHARTS_DIR" || error
   helm repo index . --url "https://raw.githubusercontent.com/$CHARTS_REPO/$CHARTS_BRANCH/"
