@@ -15,7 +15,7 @@ CHART_REMOTE="https://$GITHUB_ACTOR:$GIT_TOKEN@github.com/$REPOSITORY.git"
 
 CHARTS_BRANCH=${CHARTS_BRANCH:-$GIT_BRANCH}
 CHARTS_REMOTE="https://$GITHUB_ACTOR:$CHARTS_TOKEN@github.com/$CHARTS_REPO.git"
-CHARTS_DIR=$(cd ../ && realpath "$(basename "$CHARTS_REPO")")
+CHARTS_DIR=$(cd .. && realpath "$(basename "$CHARTS_REPO")")
 
 # exit on error
 set -e
@@ -65,7 +65,9 @@ package() {
 
   (cd ..
   git clone "$CHARTS_REMOTE"
+  echo $(pwd)
   cd "$CHARTS_DIR" || error
+  echo $(pwd)
   git checkout "$CHARTS_BRANCH")
 
   # custom packaging command
