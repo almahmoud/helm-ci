@@ -66,6 +66,7 @@ package() {
   (cd ..
   git clone "$CHARTS_REMOTE"
   echo $(pwd)
+  echo $CHARTS_DIR
   cd "$CHARTS_DIR" || error
   echo $(pwd)
   git checkout "$CHARTS_BRANCH")
